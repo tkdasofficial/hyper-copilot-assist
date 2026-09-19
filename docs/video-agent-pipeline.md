@@ -5,7 +5,7 @@ Decoupled AI video generation across three systems:
 | System                               | Owns                                                                                       |
 | ------------------------------------ | ------------------------------------------------------------------------------------------ |
 | Lovable app (this repo)              | UI, auth, credits, job row creation, dispatch, realtime display                            |
-| Supabase (`uqyuwxztevkokzqldibh`)    | Auth, `profiles`, `subscriptions`, `videos`, private `videos` storage bucket, Realtime     |
+| Supabase (`<your-project-ref>`)    | Auth, `profiles`, `subscriptions`, `videos`, private `videos` storage bucket, Realtime     |
 | `tkdasofficial/video-agent` (GitHub) | All heavy AI work: Pixazo images, Cloudflare AI script + voice, FFmpeg composition, upload |
 
 ```text

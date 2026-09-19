@@ -1,6 +1,6 @@
 # Supabase Edge Functions — source of truth in this repo
 
-All ten backend functions live in the Supabase project `uqyuwxztevkokzqldibh`.
+All ten backend functions live in the Supabase project `<your-project-ref>`.
 This folder holds a versioned copy of each one, in the standard layout:
 
 ```text
@@ -42,9 +42,9 @@ browser and expose these privileged endpoints to anyone signed in.
 ## Edit / deploy flow
 
 ```bash
-supabase functions download <name> --project-ref uqyuwxztevkokzqldibh
+supabase functions download <name> --project-ref <your-project-ref>
 # edit, then copy the result back into docs/edge-functions/<name>/index.ts
-supabase functions deploy <name> --project-ref uqyuwxztevkokzqldibh --no-verify-jwt
+supabase functions deploy <name> --project-ref <your-project-ref> --no-verify-jwt
 ```
 
 CORS headers, `Deno.env.get(...)` reads and payload handling in each `index.ts` are kept

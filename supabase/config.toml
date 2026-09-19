@@ -1,4 +1,4 @@
-project_id = "uqyuwxztevkokzqldibh"
+project_id = "placeholder"
 
 [functions.generate-audio]
 verify_jwt = false
