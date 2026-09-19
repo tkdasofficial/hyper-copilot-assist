@@ -115,7 +115,7 @@ export function TopBar() {
         <nav className="flex-1 space-y-0.5 overflow-y-auto pt-2">
           <DrawerLink
             icon={Home}
-            label="Home"
+            label="Copilot"
             to="/dashboard"
             onNavigate={() => setMenuOpen(false)}
           />
