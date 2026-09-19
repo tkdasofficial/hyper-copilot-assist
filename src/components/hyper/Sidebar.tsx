@@ -28,7 +28,7 @@ type Item = {
 };
 
 const primary: Item[] = [
-  { label: "Home", icon: Home, to: "/dashboard" },
+  { label: "Copilot", icon: Home, to: "/dashboard" },
   { label: "Explore", icon: Compass },
 ];
 
