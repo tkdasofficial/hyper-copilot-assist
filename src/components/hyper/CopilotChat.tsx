@@ -43,20 +43,20 @@ function Selector({ label, options, value, onChange, icon: Icon }: {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button type="button" variant="ghost" size="sm" className="h-8 gap-1.5 rounded-full px-2.5 text-[12px] text-muted-foreground hover:text-foreground">
-          <Icon className="h-3.5 w-3.5" strokeWidth={1.9} />
-          <span className="max-w-[112px] truncate">{selected?.label}</span>
+        <Button type="button" variant="ghost" size="sm" className="h-7 gap-1 rounded-full px-2 text-[11px] text-muted-foreground hover:text-foreground">
+          <Icon className="h-3 w-3" strokeWidth={1.9} />
+          <span className="max-w-[96px] truncate">{selected?.label}</span>
           <ChevronDown className="h-3 w-3 opacity-60" strokeWidth={2.2} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" side="top" className="w-56 rounded-lg p-1.5">
-        <DropdownMenuLabel className="px-2 py-1.5 text-[11px] uppercase text-muted-foreground">{label}</DropdownMenuLabel>
+      <DropdownMenuContent align="start" side="top" className="w-52 rounded-lg p-1">
+        <DropdownMenuLabel className="px-2 py-1 text-[10px] uppercase text-muted-foreground">{label}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {options.map((option) => (
-          <DropdownMenuItem key={option.id} onSelect={() => onChange(option.id)} className="rounded-md px-2.5 py-2">
+          <DropdownMenuItem key={option.id} onSelect={() => onChange(option.id)} className="rounded-md px-2 py-1.5">
             <span className="min-w-0 flex-1">
-              <span className="block text-[13px] font-semibold">{option.label}</span>
-              <span className="block text-[11px] text-muted-foreground">{option.detail}</span>
+              <span className="block text-[12px] font-semibold">{option.label}</span>
+              <span className="block text-[10px] text-muted-foreground">{option.detail}</span>
             </span>
             {option.id === value ? <Check className="h-4 w-4" strokeWidth={2.4} /> : null}
           </DropdownMenuItem>
@@ -102,30 +102,30 @@ export function CopilotChat() {
 
   return (
     <section className="relative flex min-h-[calc(100vh-65px)] flex-col">
-      <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 pb-48 pt-8 sm:px-6 sm:pb-44 lg:pt-12">
+      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pb-36 pt-6 sm:px-6 sm:pb-36 lg:pt-8">
         {messages.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center pb-8 text-center">
-            <span className="grid h-12 w-12 place-items-center rounded-full border border-border bg-surface shadow-sm">
-              <Sparkles className="h-5 w-5 text-spectral-3" strokeWidth={1.8} />
+          <div className="flex flex-1 flex-col items-center justify-center pb-6 text-center">
+            <span className="grid h-9 w-9 place-items-center rounded-full border border-border bg-surface shadow-sm">
+              <Sparkles className="h-4 w-4 text-spectral-3" strokeWidth={1.8} />
             </span>
-            <h1 className="mt-5 text-2xl font-extrabold sm:text-3xl">What can I help with?</h1>
-            <p className="mt-2 max-w-md text-[13px] leading-relaxed text-muted-foreground sm:text-sm">Ask, create, analyze, or turn your next idea into a clear plan.</p>
-            <div className="mt-7 grid w-full max-w-xl gap-2 sm:grid-cols-3">
+            <h1 className="mt-4 text-xl font-extrabold sm:text-2xl">What can I help with?</h1>
+            <p className="mt-1.5 max-w-sm text-[12px] leading-relaxed text-muted-foreground">Ask, create, analyze, or turn your next idea into a clear plan.</p>
+            <div className="mt-5 grid w-full max-w-lg gap-1.5 sm:grid-cols-3">
               {starters.map((starter) => (
-                <Button key={starter} type="button" variant="outline" onClick={() => { setValue(starter); textareaRef.current?.focus(); }} className="h-auto min-h-20 whitespace-normal rounded-lg px-3 py-3 text-left text-[12px] leading-snug shadow-none">
+                <Button key={starter} type="button" variant="outline" onClick={() => { setValue(starter); textareaRef.current?.focus(); }} className="h-auto min-h-16 whitespace-normal rounded-md px-2.5 py-2.5 text-left text-[11px] leading-snug shadow-none">
                   {starter}
                 </Button>
               ))}
             </div>
           </div>
         ) : (
-          <div className="space-y-7 py-4" aria-live="polite">
+          <div className="space-y-5 py-3" aria-live="polite">
             {messages.map((message) => (
               <div key={message.id} className={cn("flex gap-3", message.role === "user" && "justify-end")}>
                 {message.role === "assistant" ? (
-                  <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border bg-surface"><Bot className="h-4 w-4 text-spectral-3" strokeWidth={1.9} /></span>
+                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border bg-surface"><Bot className="h-3.5 w-3.5 text-spectral-3" strokeWidth={1.9} /></span>
                 ) : null}
-                <div className={cn("max-w-[85%] whitespace-pre-wrap text-[14px] leading-6", message.role === "user" ? "rounded-lg bg-foreground px-4 py-2.5 text-background" : "pt-1 text-foreground")}>{message.text}</div>
+                <div className={cn("max-w-[85%] whitespace-pre-wrap text-[13px] leading-5", message.role === "user" ? "rounded-md bg-foreground px-3 py-2 text-background" : "pt-1 text-foreground")}>{message.text}</div>
               </div>
             ))}
             <div ref={threadEndRef} />
@@ -133,19 +133,18 @@ export function CopilotChat() {
         )}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-background/90 px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl lg:left-[248px] lg:px-8">
-        <div className="mx-auto max-w-3xl">
-          <div className="rounded-xl border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
-            <textarea ref={textareaRef} value={value} rows={1} aria-label="Message Copilot" placeholder="Message Copilot…" onChange={(event) => setValue(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); send(); } }} className="block max-h-[180px] min-h-[52px] w-full resize-none overflow-y-auto bg-transparent px-4 pb-2 pt-3.5 text-[14px] leading-6 text-foreground outline-none placeholder:text-muted-foreground" />
-            <div className="flex flex-wrap items-center gap-1 border-t border-border px-2 py-2">
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-background/90 px-3 pb-[max(8px,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl lg:left-[248px] lg:px-8">
+        <div className="mx-auto max-w-2xl">
+          <div className="rounded-lg border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
+            <textarea ref={textareaRef} value={value} rows={1} aria-label="Message Copilot" placeholder="Message Copilot…" onChange={(event) => setValue(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); send(); } }} className="block max-h-[160px] min-h-[44px] w-full resize-none overflow-y-auto bg-transparent px-3 pb-1.5 pt-2.5 text-[13px] leading-5 text-foreground outline-none placeholder:text-muted-foreground" />
+            <div className="flex flex-wrap items-center gap-0.5 border-t border-border px-1.5 py-1.5">
               <input ref={fileRef} type="file" className="hidden" multiple />
-              <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-8 w-8 rounded-full text-muted-foreground"><Paperclip className="h-4 w-4" strokeWidth={1.9} /></Button>
+              <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
               <Selector label="Models" options={models} value={model} onChange={setModel} icon={BrainCircuit} />
               <Selector label="Tasks" options={tasks} value={task} onChange={setTask} icon={WandSparkles} />
-              <Button type="button" onClick={send} disabled={!value.trim()} className="ml-auto h-8 rounded-full px-3 text-[12px] font-bold">Run<ArrowUp className="h-3.5 w-3.5" strokeWidth={2.4} /></Button>
+              <Button type="button" onClick={send} disabled={!value.trim()} className="ml-auto h-7 rounded-full px-2.5 text-[11px] font-bold">Run<ArrowUp className="h-3 w-3" strokeWidth={2.4} /></Button>
             </div>
           </div>
-          <p className="mt-1.5 text-center text-[10px] text-muted-foreground">Copilot can make mistakes. Check important information.</p>
         </div>
       </div>
     </section>
