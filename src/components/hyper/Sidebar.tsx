@@ -34,11 +34,7 @@ type Item = {
 
 const primary: Item[] = [{ label: "Explore", icon: Compass }];
 
-const copilotItems: Item[] = [
-  { label: "New", icon: Plus, to: "/copilot/new" },
-  { label: "Copilot", icon: MessageSquare, to: "/copilot" },
-  { label: "History", icon: History, to: "/copilot/history" },
-];
+const newChatItem: Item = { label: "New", icon: Plus, to: "/copilot/new" };
 
 const generate: Item[] = [
   { label: "Image", icon: ImageIcon, to: "/image" },
