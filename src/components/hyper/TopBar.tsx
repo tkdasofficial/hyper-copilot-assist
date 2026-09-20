@@ -105,7 +105,7 @@ function DrawerCopilot({ onNavigate }: { onNavigate: () => void }) {
         aria-expanded={open}
         className={rowCls}
       >
-        <Sparkles className="h-[18px] w-[18px]" strokeWidth={1.7} />
+        <AppIcon className="h-[18px] w-[18px] rounded-[5px]" />
         Copilot
         <ChevronDown
           className={cn("ml-auto h-4 w-4 opacity-60 transition-transform", open && "rotate-180")}
@@ -226,15 +226,6 @@ export function TopBar() {
             to="/workflows"
             onNavigate={() => setMenuOpen(false)}
           />
-          <p className="px-3 pb-1.5 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground/70">
-            Company
-          </p>
-          <DrawerLink
-            icon={Tag}
-            label="Pricing"
-            to="/pricing"
-            onNavigate={() => setMenuOpen(false)}
-          />
         </nav>
       </div>
     </div>
@@ -298,14 +289,6 @@ export function TopBar() {
             {account ? account.credits.toLocaleString() : "—"}
             <span className="text-muted-foreground">credits</span>
           </span>
-          <Link
-            to="/pricing"
-            aria-label="Upgrade plan"
-            title="Upgrade plan"
-            className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-background transition-opacity hover:opacity-90"
-          >
-            <Crown className="h-4 w-4 text-spectral-1" strokeWidth={2.2} />
-          </Link>
           <ProfileMenu />
         </div>
       </header>
