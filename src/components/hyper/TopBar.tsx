@@ -8,6 +8,11 @@ import {
   Menu,
   X,
   Home,
+  Sparkles,
+  Plus,
+  History,
+  MessageSquare,
+  ChevronDown,
   ImageIcon,
   Video,
   AudioLines,
@@ -20,6 +25,7 @@ import {
 } from "lucide-react";
 import { useRouterState, useRouter, Link } from "@tanstack/react-router";
 import { ProfileMenu } from "./ProfileMenu";
+import { useCopilotStore } from "./useCopilotStore";
 import { cn } from "@/lib/utils";
 
 const pageTitles: Record<string, string> = {
@@ -113,12 +119,7 @@ export function TopBar() {
         </div>
 
         <nav className="flex-1 space-y-0.5 overflow-y-auto pt-2">
-          <DrawerLink
-            icon={Home}
-            label="Copilot"
-            to="/copilot/new"
-            onNavigate={() => setMenuOpen(false)}
-          />
+          <DrawerCopilot onNavigate={() => setMenuOpen(false)} />
           <p className="px-3 pb-1.5 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground/70">
             Generate
           </p>
