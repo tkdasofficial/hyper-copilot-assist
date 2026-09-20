@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUp, Bot, BrainCircuit, Check, ChevronDown, Paperclip, Sparkles, WandSparkles } from "lucide-react";
+import { BrainCircuit, Check, ChevronDown, Paperclip, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import lightIcon from "@/assets/light_app_icon.svg";
+import darkIcon from "@/assets/dark_app_icon.svg";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,16 +14,9 @@ import {
 import { cn } from "@/lib/utils";
 
 const models = [
-  { id: "hyper", label: "Hyper Copilot", detail: "Balanced" },
-  { id: "flash", label: "Hyper Flash", detail: "Fast" },
-  { id: "reason", label: "Hyper Reason", detail: "Deep thinking" },
-];
-
-const tasks = [
-  { id: "general", label: "General", detail: "Ask anything" },
-  { id: "create", label: "Create", detail: "Ideas and content" },
-  { id: "plan", label: "Plan", detail: "Turn goals into steps" },
-  { id: "analyze", label: "Analyze", detail: "Review and improve" },
+  { id: "speed", label: "Copilot Speed", detail: "Quick responses" },
+  { id: "flash", label: "Copilot Flash", detail: "Balanced" },
+  { id: "heavy", label: "Copilot Heavy", detail: "Deep thinking" },
 ];
 
 const starters = [
@@ -31,6 +26,15 @@ const starters = [
 ];
 
 type Message = { id: number; role: "user" | "assistant"; text: string };
+
+function AppIcon({ className }: { className?: string }) {
+  return (
+    <span className={cn("relative block shrink-0 overflow-hidden", className)}>
+      <img src={lightIcon} alt="" className="h-full w-full object-contain dark:hidden" />
+      <img src={darkIcon} alt="" className="hidden h-full w-full object-contain dark:block" />
+    </span>
+  );
+}
 
 function Selector({ label, options, value, onChange, icon: Icon }: {
   label: string;
@@ -50,8 +54,6 @@ function Selector({ label, options, value, onChange, icon: Icon }: {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" side="top" className="w-52 rounded-lg p-1">
-        <DropdownMenuLabel className="px-2 py-1 text-[10px] uppercase text-muted-foreground">{label}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
         {options.map((option) => (
           <DropdownMenuItem key={option.id} onSelect={() => onChange(option.id)} className="rounded-md px-2 py-1.5">
             <span className="min-w-0 flex-1">
@@ -69,7 +71,6 @@ function Selector({ label, options, value, onChange, icon: Icon }: {
 export function CopilotChat() {
   const [value, setValue] = useState("");
   const [model, setModel] = useState(models[0]?.id ?? "hyper");
-  const [task, setTask] = useState(tasks[0]?.id ?? "general");
   const [messages, setMessages] = useState<Message[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -89,13 +90,12 @@ export function CopilotChat() {
   const send = () => {
     const prompt = value.trim();
     if (!prompt) return;
-    const selectedModel = models.find((option) => option.id === model)?.label ?? "Hyper Copilot";
-    const selectedTask = tasks.find((option) => option.id === task)?.label ?? "General";
+    const selectedModel = models.find((option) => option.id === model)?.label ?? "Copilot Speed";
     const stamp = Date.now();
     setMessages((current) => [
       ...current,
       { id: stamp, role: "user", text: prompt },
-      { id: stamp + 1, role: "assistant", text: `I’m ready to help with this as a ${selectedTask.toLowerCase()} task using ${selectedModel}. I’ll keep the result focused and practical.` },
+      { id: stamp + 1, role: "assistant", text: `I’m ready to help using ${selectedModel}. I’ll keep the result focused and practical.` },
     ]);
     setValue("");
   };
@@ -105,14 +105,12 @@ export function CopilotChat() {
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pb-36 pt-6 sm:px-6 sm:pb-36 lg:pt-8">
         {messages.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center pb-6 text-center">
-            <span className="grid h-9 w-9 place-items-center rounded-full border border-border bg-surface shadow-sm">
-              <Sparkles className="h-4 w-4 text-spectral-3" strokeWidth={1.8} />
-            </span>
+            <AppIcon className="h-9 w-9 rounded-lg" />
             <h1 className="mt-4 text-xl font-extrabold sm:text-2xl">What can I help with?</h1>
             <p className="mt-1.5 max-w-sm text-[12px] leading-relaxed text-muted-foreground">Ask, create, analyze, or turn your next idea into a clear plan.</p>
-            <div className="mt-5 grid w-full max-w-lg gap-1.5 sm:grid-cols-3">
+            <div className="mt-5 flex w-full max-w-md flex-col items-center gap-1">
               {starters.map((starter) => (
-                <Button key={starter} type="button" variant="outline" onClick={() => { setValue(starter); textareaRef.current?.focus(); }} className="h-auto min-h-16 whitespace-normal rounded-md px-2.5 py-2.5 text-left text-[11px] leading-snug shadow-none">
+                <Button key={starter} type="button" variant="ghost" onClick={() => { setValue(starter); textareaRef.current?.focus(); }} className="h-7 w-full justify-start rounded-sm px-2 text-left text-[11px] font-normal text-muted-foreground hover:text-foreground">
                   {starter}
                 </Button>
               ))}
@@ -123,7 +121,7 @@ export function CopilotChat() {
             {messages.map((message) => (
               <div key={message.id} className={cn("flex gap-3", message.role === "user" && "justify-end")}>
                 {message.role === "assistant" ? (
-                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border bg-surface"><Bot className="h-3.5 w-3.5 text-spectral-3" strokeWidth={1.9} /></span>
+                  <AppIcon className="mt-0.5 h-7 w-7 rounded-md" />
                 ) : null}
                 <div className={cn("max-w-[85%] whitespace-pre-wrap text-[13px] leading-5", message.role === "user" ? "rounded-md bg-foreground px-3 py-2 text-background" : "pt-1 text-foreground")}>{message.text}</div>
               </div>
@@ -140,9 +138,8 @@ export function CopilotChat() {
             <div className="flex flex-wrap items-center gap-0.5 border-t border-border px-1.5 py-1.5">
               <input ref={fileRef} type="file" className="hidden" multiple />
               <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
-              <Selector label="Models" options={models} value={model} onChange={setModel} icon={BrainCircuit} />
-              <Selector label="Tasks" options={tasks} value={task} onChange={setTask} icon={WandSparkles} />
-              <Button type="button" onClick={send} disabled={!value.trim()} className="ml-auto h-7 rounded-full px-2.5 text-[11px] font-bold">Run<ArrowUp className="h-3 w-3" strokeWidth={2.4} /></Button>
+              <Selector label="Model" options={models} value={model} onChange={setModel} icon={BrainCircuit} />
+              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-full"><Play className="h-3 w-3 fill-current" strokeWidth={2.2} /></Button>
             </div>
           </div>
         </div>
