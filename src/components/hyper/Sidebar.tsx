@@ -111,6 +111,30 @@ export function Sidebar() {
       </div>
 
       <nav className="flex-1 overflow-y-auto">
+        <button
+          type="button"
+          onClick={() => setCopilotOpen((open) => !open)}
+          aria-expanded={copilotOpen}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
+        >
+          <Home className="h-[18px] w-[18px] shrink-0" />
+          <span className="truncate">Copilot</span>
+          <ChevronDown
+            className={cn(
+              "ml-auto h-3.5 w-3.5 opacity-60 transition-transform",
+              copilotOpen && "rotate-180",
+            )}
+            strokeWidth={2.2}
+          />
+        </button>
+        {copilotOpen ? (
+          <div className="ml-5 space-y-0.5 border-l border-border pl-2">
+            <NavItem item={{ label: "Chat", icon: MessageSquare, to: "/copilot" }} />
+            {copilotItems.map((i) => (
+              <NavItem key={i.label} item={i} />
+            ))}
+          </div>
+        ) : null}
         <div className="space-y-0.5">
           {primary.map((i) => (
             <NavItem key={i.label} item={i} />
