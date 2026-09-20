@@ -10,7 +10,6 @@ import {
   AudioLines,
   PenTool,
   Boxes,
-  Sparkles,
   Compass,
   ChevronRight,
   UserSquare,
@@ -21,6 +20,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Logo } from "./Logo";
+import { AppIcon } from "./AppIcon";
 import { useCopilotStore } from "./useCopilotStore";
 import { VideoAgentIcon } from "./VideoAgentIcon";
 import { cn } from "@/lib/utils";
