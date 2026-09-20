@@ -70,7 +70,7 @@ function AuthPage() {
       .maybeSingle();
 
     navigate({
-      to: profile?.onboarding_completed ? "/dashboard" : "/getting-ready",
+      to: profile?.onboarding_completed ? "/copilot/new" : "/getting-ready",
       replace: true,
     });
   }
@@ -168,7 +168,7 @@ function AuthPage() {
           ? "You're in as a guest."
           : "Guest preview — sign up when you're ready to generate.",
       );
-      navigate({ to: "/dashboard", replace: true });
+      navigate({ to: "/copilot/new", replace: true });
     } finally {
       setBusy(false);
     }

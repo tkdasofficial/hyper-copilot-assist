@@ -178,7 +178,7 @@ export function TopBar() {
               onClick={() => {
                 if (typeof window !== "undefined" && window.history.length > 1)
                   router.history.back();
-                else router.navigate({ to: "/dashboard" });
+                else router.navigate({ to: "/copilot/new" });
               }}
               className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-background transition-opacity hover:opacity-90"
             >

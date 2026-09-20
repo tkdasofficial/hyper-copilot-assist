@@ -76,7 +76,7 @@ function GettingReady() {
     setBusy(true);
     try {
       await completeOnboarding({ data: { full_name: fullName.trim(), role, purpose } });
-      navigate({ to: "/dashboard", replace: true });
+      navigate({ to: "/copilot/new", replace: true });
     } catch {
       toast.error("We couldn't save your details. Please try again.");
     } finally {
