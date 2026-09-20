@@ -32,23 +32,23 @@ function ModelSelector({
           type="button"
           variant="ghost"
           size="sm"
-          className="h-9 gap-1.5 rounded-full px-3 text-[13px] text-muted-foreground hover:text-foreground"
+          className="h-7 gap-1 rounded-full px-2 text-[11px] text-muted-foreground hover:text-foreground"
         >
-          <BrainCircuit className="h-4 w-4" strokeWidth={1.9} />
-          <span className="max-w-[160px] truncate">{selected?.label}</span>
-          <ChevronDown className="h-4 w-4 opacity-60" strokeWidth={2.2} />
+          <BrainCircuit className="h-3 w-3" strokeWidth={1.9} />
+          <span className="max-w-[96px] truncate">{selected?.label}</span>
+          <ChevronDown className="h-3 w-3 opacity-60" strokeWidth={2.2} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" side="top" className="w-60 rounded-lg p-1">
+      <DropdownMenuContent align="start" side="top" className="w-52 rounded-lg p-1">
         {COPILOT_MODELS.map((option) => (
           <DropdownMenuItem
             key={option.id}
             onSelect={() => onChange(option.id)}
-            className="rounded-md px-2.5 py-2"
+            className="rounded-md px-2 py-1.5"
           >
             <span className="min-w-0 flex-1">
-              <span className="block text-[13px] font-semibold">{option.label}</span>
-              <span className="block text-[11px] text-muted-foreground">{option.detail}</span>
+              <span className="block text-[12px] font-semibold">{option.label}</span>
+              <span className="block text-[10px] text-muted-foreground">{option.detail}</span>
             </span>
             {option.id === value ? <Check className="h-4 w-4" strokeWidth={2.4} /> : null}
           </DropdownMenuItem>
@@ -83,13 +83,13 @@ export function CopilotComposer({
     const textarea = textareaRef.current;
     if (!textarea) return;
     textarea.style.height = "0px";
-    textarea.style.height = `${Math.min(Math.max(textarea.scrollHeight, 64), 260)}px`;
+    textarea.style.height = `${Math.min(Math.max(textarea.scrollHeight, 44), 160)}px`;
   }, [value, textareaRef]);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 px-2 pb-[max(10px,env(safe-area-inset-bottom))] pt-2 sm:px-4 lg:left-[248px] lg:px-6">
-      <div className="w-full">
-        <div className="pointer-events-auto rounded-xl border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 px-3 pb-[max(8px,env(safe-area-inset-bottom))] pt-2 lg:left-[248px] lg:px-8">
+      <div className="mx-auto max-w-2xl">
+        <div className="pointer-events-auto rounded-lg border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
           <textarea
             ref={textareaRef}
             value={value}
@@ -97,9 +97,9 @@ export function CopilotComposer({
             aria-label="Message Copilot"
             placeholder="Message Copilot…"
             onChange={(event) => onValueChange(event.target.value)}
-            className="block max-h-[260px] min-h-[64px] w-full resize-none overflow-y-auto bg-transparent px-4 pb-2 pt-3.5 text-[15px] leading-6 text-foreground outline-none placeholder:text-muted-foreground"
+            className="block max-h-[160px] min-h-[44px] w-full resize-none overflow-y-auto bg-transparent px-3 pb-1.5 pt-2.5 text-[13px] leading-5 text-foreground outline-none placeholder:text-muted-foreground"
           />
-          <div className="flex flex-wrap items-center gap-1 px-2 pb-2 pt-0.5">
+          <div className="flex flex-wrap items-center gap-0.5 px-1.5 pb-1.5 pt-0.5">
             <input ref={fileRef} type="file" className="hidden" multiple />
             <Button
               type="button"
@@ -108,9 +108,9 @@ export function CopilotComposer({
               aria-label="Attach files"
               title="Attach files"
               onClick={() => fileRef.current?.click()}
-              className="h-9 w-9 rounded-full text-muted-foreground"
+              className="h-7 w-7 rounded-full text-muted-foreground"
             >
-              <Paperclip className="h-4 w-4" strokeWidth={1.9} />
+              <Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} />
             </Button>
             <ModelSelector value={model} onChange={onModelChange} />
             <Button
@@ -120,12 +120,12 @@ export function CopilotComposer({
               aria-label={pending ? "Running" : "Run"}
               title={pending ? "Running" : "Run"}
               size="icon"
-              className="ml-auto h-9 w-9 rounded-full"
+              className="ml-auto h-7 w-7 rounded-full"
             >
               {pending ? (
-                <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2.4} />
+                <Loader2 className="h-3 w-3 animate-spin" strokeWidth={2.4} />
               ) : (
-                <PlayIcon className="h-3.5 w-3.5" />
+                <PlayIcon className="h-2.5 w-2.5" />
               )}
             </Button>
           </div>

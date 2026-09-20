@@ -43,7 +43,7 @@ function CopilotConversationPage() {
   return (
     <CopilotShell active="chat" chatId={chatId}>
       <section className="relative flex min-h-[calc(100vh-110px)] flex-col">
-        <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 pb-44 pt-4 sm:px-6">
+        <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pb-36 pt-4 sm:px-6">
           {!chat ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
               <AppIcon className="h-12 w-12 rounded-xl" />

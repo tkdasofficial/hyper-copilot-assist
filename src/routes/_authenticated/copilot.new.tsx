@@ -44,7 +44,7 @@ function CopilotNew() {
   return (
     <CopilotShell active="new">
       <section className="relative flex min-h-[calc(100vh-110px)] flex-col">
-        <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 pb-44 pt-6 sm:px-6 lg:pt-8">
+        <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pb-36 pt-6 sm:px-6 lg:pt-8">
           <div className="flex flex-1 flex-col items-center justify-center pb-5 text-center">
             <AppIcon className="h-14 w-14 rounded-xl sm:h-16 sm:w-16" />
             <h1 className="mt-7 max-w-lg text-3xl font-medium leading-tight sm:text-4xl">
