@@ -7,8 +7,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
@@ -36,8 +34,7 @@ function AppIcon({ className }: { className?: string }) {
   );
 }
 
-function Selector({ label, options, value, onChange, icon: Icon }: {
-  label: string;
+function Selector({ options, value, onChange, icon: Icon }: {
   options: { id: string; label: string; detail: string }[];
   value: string;
   onChange: (value: string) => void;
@@ -138,7 +135,7 @@ export function CopilotChat() {
             <div className="flex flex-wrap items-center gap-0.5 border-t border-border px-1.5 py-1.5">
               <input ref={fileRef} type="file" className="hidden" multiple />
               <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
-              <Selector label="Model" options={models} value={model} onChange={setModel} icon={BrainCircuit} />
+              <Selector options={models} value={model} onChange={setModel} icon={BrainCircuit} />
               <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-full"><Play className="h-3 w-3 fill-current" strokeWidth={2.2} /></Button>
             </div>
           </div>
