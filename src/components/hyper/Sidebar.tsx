@@ -163,7 +163,7 @@ export function Sidebar() {
           aria-expanded={copilotOpen}
           className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
         >
-          <Sparkles className="h-[18px] w-[18px] shrink-0" />
+          <AppIcon className="h-[18px] w-[18px] rounded-[5px]" />
           <span className="truncate">Copilot</span>
           <ChevronDown
             className={cn(
@@ -199,23 +199,6 @@ export function Sidebar() {
           </div>
         </div>
       </nav>
-
-      <div className="ring-spectral mt-4 overflow-hidden rounded-2xl bg-surface p-3.5">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-spectral-2" strokeWidth={2} />
-          <p className="text-[13px] font-bold">Hyper Pro</p>
-        </div>
-        <p className="mt-1.5 text-[11.5px] leading-relaxed text-muted-foreground">
-          Unlimited fast renders, 4K upscaling and private models.
-        </p>
-        <Link
-          to="/pricing"
-          className="mt-3 flex w-full items-center justify-center gap-1 rounded-full bg-primary px-3 py-1.5 text-[12px] font-bold text-primary-foreground transition-opacity hover:opacity-90"
-        >
-          Upgrade
-          <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.5} />
-        </Link>
-      </div>
     </aside>
   );
 }
