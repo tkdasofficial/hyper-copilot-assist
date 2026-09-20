@@ -1,7 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
 import {
-  Home,
   Plus,
   History,
   ChevronDown,
@@ -164,7 +163,7 @@ export function Sidebar() {
           aria-expanded={copilotOpen}
           className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
         >
-          <Home className="h-[18px] w-[18px] shrink-0" />
+          <Sparkles className="h-[18px] w-[18px] shrink-0" />
           <span className="truncate">Copilot</span>
           <ChevronDown
             className={cn(
