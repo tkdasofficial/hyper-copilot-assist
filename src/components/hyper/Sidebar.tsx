@@ -36,6 +36,7 @@ const primary: Item[] = [{ label: "Explore", icon: Compass }];
 
 const copilotItems: Item[] = [
   { label: "New", icon: Plus, to: "/copilot/new" },
+  { label: "Copilot", icon: MessageSquare, to: "/copilot" },
   { label: "History", icon: History, to: "/copilot/history" },
 ];
 
@@ -105,7 +106,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 export function Sidebar() {
-  const [copilotOpen, setCopilotOpen] = useState(true);
+  const [copilotOpen, setCopilotOpen] = useState(false);
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[248px] flex-col border-r border-border bg-background/80 px-3 pb-4 pt-4 backdrop-blur-xl lg:flex">
       <div className="px-2 pb-3">
@@ -131,7 +132,6 @@ export function Sidebar() {
         </button>
         {copilotOpen ? (
           <div className="ml-5 space-y-0.5 border-l border-border pl-2">
-            <NavItem item={{ label: "Chat", icon: MessageSquare, to: "/copilot" }} />
             {copilotItems.map((i) => (
               <NavItem key={i.label} item={i} />
             ))}
