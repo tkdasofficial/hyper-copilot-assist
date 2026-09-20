@@ -8,6 +8,11 @@ import {
   Menu,
   X,
   Home,
+  Sparkles,
+  Plus,
+  History,
+  MessageSquare,
+  ChevronDown,
   ImageIcon,
   Video,
   AudioLines,
@@ -20,6 +25,7 @@ import {
 } from "lucide-react";
 import { useRouterState, useRouter, Link } from "@tanstack/react-router";
 import { ProfileMenu } from "./ProfileMenu";
+import { useCopilotStore } from "./useCopilotStore";
 import { cn } from "@/lib/utils";
 
 const pageTitles: Record<string, string> = {
@@ -82,6 +88,78 @@ function DrawerLink({
   );
 }
 
+function DrawerCopilot({ onNavigate }: { onNavigate: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const { chats } = useCopilotStore();
+  const recent = [...chats].sort((a, b) => b.updatedAt - a.updatedAt);
+
+  const rowCls =
+    "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground";
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        className={rowCls}
+      >
+        <Sparkles className="h-[18px] w-[18px]" strokeWidth={1.7} />
+        Copilot
+        <ChevronDown
+          className={cn("ml-auto h-4 w-4 opacity-60 transition-transform", open && "rotate-180")}
+          strokeWidth={2.2}
+        />
+      </button>
+      {open ? (
+        <div className="ml-5 mt-0.5 space-y-0.5 border-l border-border pl-2">
+          <Link to="/copilot/new" onClick={onNavigate} className={rowCls}>
+            <Plus className="h-[18px] w-[18px]" strokeWidth={1.7} />
+            New
+          </Link>
+          <button
+            type="button"
+            onClick={() => setHistoryOpen((value) => !value)}
+            aria-expanded={historyOpen}
+            className={rowCls}
+          >
+            <History className="h-[18px] w-[18px]" strokeWidth={1.7} />
+            History
+            <ChevronDown
+              className={cn(
+                "ml-auto h-4 w-4 opacity-60 transition-transform",
+                historyOpen && "rotate-180",
+              )}
+              strokeWidth={2.2}
+            />
+          </button>
+          {historyOpen ? (
+            <div className="ml-3 mt-0.5 max-h-[180px] space-y-0.5 overflow-y-auto border-l border-border pl-2">
+              {recent.length === 0 ? (
+                <p className="px-3 py-1.5 text-[12px] text-muted-foreground/70">No chats yet</p>
+              ) : (
+                recent.map((chat) => (
+                  <Link
+                    key={chat.id}
+                    to="/copilot/$chatId"
+                    params={{ chatId: chat.id }}
+                    onClick={onNavigate}
+                    className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
+                  >
+                    <MessageSquare className="h-3.5 w-3.5 shrink-0 opacity-70" />
+                    <span className="truncate">{chat.title}</span>
+                  </Link>
+                ))
+              )}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function TopBar() {
   const { account } = useAccount();
   const router = useRouter();
@@ -113,12 +191,7 @@ export function TopBar() {
         </div>
 
         <nav className="flex-1 space-y-0.5 overflow-y-auto pt-2">
-          <DrawerLink
-            icon={Home}
-            label="Copilot"
-            to="/copilot/new"
-            onNavigate={() => setMenuOpen(false)}
-          />
+          <DrawerCopilot onNavigate={() => setMenuOpen(false)} />
           <p className="px-3 pb-1.5 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground/70">
             Generate
           </p>
