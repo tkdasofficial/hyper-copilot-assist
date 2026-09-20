@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useAccount } from "@/hooks/useAccount";
 import {
-  Crown,
   Search,
   Zap,
   ArrowLeft,
   Menu,
   X,
   Home,
-  Sparkles,
   Plus,
   History,
   MessageSquare,
@@ -16,7 +14,6 @@ import {
   ImageIcon,
   Video,
   AudioLines,
-  Tag,
   UserSquare,
   LibraryBig,
   Clapperboard,
@@ -25,6 +22,7 @@ import {
 } from "lucide-react";
 import { useRouterState, useRouter, Link } from "@tanstack/react-router";
 import { ProfileMenu } from "./ProfileMenu";
+import { AppIcon } from "./AppIcon";
 import { useCopilotStore } from "./useCopilotStore";
 import { cn } from "@/lib/utils";
 
