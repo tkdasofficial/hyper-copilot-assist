@@ -32,23 +32,23 @@ function ModelSelector({
           type="button"
           variant="ghost"
           size="sm"
-          className="h-7 gap-1 rounded-full px-2 text-[11px] text-muted-foreground hover:text-foreground"
+          className="h-9 gap-1.5 rounded-full px-3 text-[13px] text-muted-foreground hover:text-foreground"
         >
-          <BrainCircuit className="h-3 w-3" strokeWidth={1.9} />
-          <span className="max-w-[96px] truncate">{selected?.label}</span>
-          <ChevronDown className="h-3 w-3 opacity-60" strokeWidth={2.2} />
+          <BrainCircuit className="h-4 w-4" strokeWidth={1.9} />
+          <span className="max-w-[160px] truncate">{selected?.label}</span>
+          <ChevronDown className="h-4 w-4 opacity-60" strokeWidth={2.2} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" side="top" className="w-52 rounded-lg p-1">
+      <DropdownMenuContent align="start" side="top" className="w-60 rounded-lg p-1">
         {COPILOT_MODELS.map((option) => (
           <DropdownMenuItem
             key={option.id}
             onSelect={() => onChange(option.id)}
-            className="rounded-md px-2 py-1.5"
+            className="rounded-md px-2.5 py-2"
           >
             <span className="min-w-0 flex-1">
-              <span className="block text-[12px] font-semibold">{option.label}</span>
-              <span className="block text-[10px] text-muted-foreground">{option.detail}</span>
+              <span className="block text-[13px] font-semibold">{option.label}</span>
+              <span className="block text-[11px] text-muted-foreground">{option.detail}</span>
             </span>
             {option.id === value ? <Check className="h-4 w-4" strokeWidth={2.4} /> : null}
           </DropdownMenuItem>
