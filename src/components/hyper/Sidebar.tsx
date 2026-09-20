@@ -1,6 +1,10 @@
 import type { LucideIcon } from "lucide-react";
+import { useState } from "react";
 import {
   Home,
+  Plus,
+  History,
+  ChevronDown,
   ImageIcon,
   Video,
   AudioLines,
@@ -27,9 +31,11 @@ type Item = {
   to?: string;
 };
 
-const primary: Item[] = [
-  { label: "Copilot", icon: Home, to: "/dashboard" },
-  { label: "Explore", icon: Compass },
+const primary: Item[] = [{ label: "Explore", icon: Compass }];
+
+const copilotItems: Item[] = [
+  { label: "New", icon: Plus, to: "/copilot/new" },
+  { label: "History", icon: History, to: "/copilot/history" },
 ];
 
 const generate: Item[] = [
