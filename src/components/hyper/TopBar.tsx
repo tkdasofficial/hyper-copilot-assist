@@ -116,7 +116,7 @@ export function TopBar() {
           <DrawerLink
             icon={Home}
             label="Copilot"
-            to="/dashboard"
+            to="/copilot/new"
             onNavigate={() => setMenuOpen(false)}
           />
           <p className="px-3 pb-1.5 pt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground/70">
