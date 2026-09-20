@@ -32,7 +32,7 @@ function CopilotHistory() {
 
   return (
     <CopilotShell active="history">
-      <section className="mx-auto w-full max-w-2xl px-4 pb-20 pt-5 sm:px-6">
+      <section className="mx-auto w-full max-w-4xl px-4 pb-24 pt-5 sm:px-6">
         <div className="flex items-center justify-between gap-3">
           <h1 className="text-[15px] font-bold tracking-[-0.02em]">History</h1>
           <Link
