@@ -22,6 +22,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Logo } from "./Logo";
+import { useCopilotStore } from "./useCopilotStore";
 import { VideoAgentIcon } from "./VideoAgentIcon";
 import { cn } from "@/lib/utils";
 
@@ -34,11 +35,7 @@ type Item = {
 
 const primary: Item[] = [{ label: "Explore", icon: Compass }];
 
-const copilotItems: Item[] = [
-  { label: "New", icon: Plus, to: "/copilot/new" },
-  { label: "Copilot", icon: MessageSquare, to: "/copilot" },
-  { label: "History", icon: History, to: "/copilot/history" },
-];
+const newChatItem: Item = { label: "New", icon: Plus, to: "/copilot/new" };
 
 const generate: Item[] = [
   { label: "Image", icon: ImageIcon, to: "/image" },
@@ -97,6 +94,53 @@ function NavItem({ item }: { item: Item }) {
   );
 }
 
+function CopilotHistory() {
+  const [open, setOpen] = useState(false);
+  const { chats } = useCopilotStore();
+  const recent = [...chats].sort((a, b) => b.updatedAt - a.updatedAt);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        className="group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
+      >
+        <History className="h-[18px] w-[18px] shrink-0" />
+        <span className="truncate">History</span>
+        <ChevronDown
+          className={cn(
+            "ml-auto h-3.5 w-3.5 opacity-60 transition-transform",
+            open && "rotate-180",
+          )}
+          strokeWidth={2.2}
+        />
+      </button>
+      {open ? (
+        <div className="ml-3 mt-0.5 max-h-[150px] space-y-0.5 overflow-y-auto border-l border-border pl-2">
+          {recent.length === 0 ? (
+            <p className="px-3 py-1.5 text-[12px] text-muted-foreground/70">No chats yet</p>
+          ) : (
+            recent.map((chat) => (
+              <Link
+                key={chat.id}
+                to="/copilot/$chatId"
+                params={{ chatId: chat.id }}
+                className="group flex w-full items-center gap-2.5 rounded-xl px-3 py-1.5 text-[12.5px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
+                activeProps={{ className: "bg-surface-2 text-foreground" }}
+              >
+                <MessageSquare className="h-3.5 w-3.5 shrink-0 opacity-70" />
+                <span className="truncate">{chat.title}</span>
+              </Link>
+            ))
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function SectionLabel({ children }: { children: string }) {
   return (
     <p className="px-3 pb-1.5 pt-5 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground/70">
@@ -132,9 +176,8 @@ export function Sidebar() {
         </button>
         {copilotOpen ? (
           <div className="ml-5 space-y-0.5 border-l border-border pl-2">
-            {copilotItems.map((i) => (
-              <NavItem key={i.label} item={i} />
-            ))}
+            <NavItem item={newChatItem} />
+            <CopilotHistory />
           </div>
         ) : null}
         <div className="space-y-0.5">
