@@ -136,10 +136,10 @@ export function CopilotChat() {
         )}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-background/90 px-3 pb-[max(8px,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl lg:left-[248px] lg:px-8">
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 px-3 pb-[max(8px,env(safe-area-inset-bottom))] pt-2 lg:left-[248px] lg:px-8">
         <div className="mx-auto max-w-2xl">
-          <div className="rounded-lg border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
-            <textarea ref={textareaRef} value={value} rows={1} aria-label="Message Copilot" placeholder="Message Copilot…" onChange={(event) => setValue(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); send(); } }} className="block max-h-[160px] min-h-[44px] w-full resize-none overflow-y-auto bg-transparent px-3 pb-1.5 pt-2.5 text-[13px] leading-5 text-foreground outline-none placeholder:text-muted-foreground" />
+          <div className="pointer-events-auto rounded-lg border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
+            <textarea ref={textareaRef} value={value} rows={1} aria-label="Message Copilot" placeholder="Message Copilot…" onChange={(event) => setValue(event.target.value)} className="block max-h-[160px] min-h-[44px] w-full resize-none overflow-y-auto bg-transparent px-3 pb-1.5 pt-2.5 text-[13px] leading-5 text-foreground outline-none placeholder:text-muted-foreground" />
             <div className="flex flex-wrap items-center gap-0.5 px-1.5 pb-1.5 pt-0.5">
               <input ref={fileRef} type="file" className="hidden" multiple />
               <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
