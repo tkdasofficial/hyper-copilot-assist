@@ -22,7 +22,6 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as VideoRouteImport } from './routes/video'
 import { Route as VideoAgentRouteImport } from './routes/video-agent'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedGettingReadyRouteImport } from './routes/_authenticated/getting-ready'
 import { Route as AuthenticatedIntegrationsRouteImport } from './routes/_authenticated/integrations'
 import { Route as VirtualModelIndexRouteImport } from './routes/virtual-model.index'
@@ -103,11 +102,6 @@ const VideoAgentRoute = VideoAgentRouteImport.update({
   id: '/video-agent',
   path: '/video-agent',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedGettingReadyRoute =
   AuthenticatedGettingReadyRouteImport.update({
@@ -211,7 +205,6 @@ export interface FileRoutesByFullPath {
   '/verify': typeof VerifyRoute
   '/video': typeof VideoRoute
   '/video-agent': typeof VideoAgentRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
   '/getting-ready': typeof AuthenticatedGettingReadyRoute
   '/integrations': typeof AuthenticatedIntegrationsRoute
   '/virtual-model/create-model': typeof VirtualModelCreateModelRoute
@@ -242,7 +235,6 @@ export interface FileRoutesByTo {
   '/verify': typeof VerifyRoute
   '/video': typeof VideoRoute
   '/video-agent': typeof VideoAgentRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
   '/getting-ready': typeof AuthenticatedGettingReadyRoute
   '/integrations': typeof AuthenticatedIntegrationsRoute
   '/virtual-model/create-model': typeof VirtualModelCreateModelRoute
@@ -275,7 +267,6 @@ export interface FileRoutesById {
   '/verify': typeof VerifyRoute
   '/video': typeof VideoRoute
   '/video-agent': typeof VideoAgentRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/getting-ready': typeof AuthenticatedGettingReadyRoute
   '/_authenticated/integrations': typeof AuthenticatedIntegrationsRoute
   '/virtual-model/create-model': typeof VirtualModelCreateModelRoute
@@ -308,7 +299,6 @@ export interface FileRouteTypes {
     | '/verify'
     | '/video'
     | '/video-agent'
-    | '/dashboard'
     | '/getting-ready'
     | '/integrations'
     | '/virtual-model/create-model'
@@ -339,7 +329,6 @@ export interface FileRouteTypes {
     | '/verify'
     | '/video'
     | '/video-agent'
-    | '/dashboard'
     | '/getting-ready'
     | '/integrations'
     | '/virtual-model/create-model'
@@ -371,7 +360,6 @@ export interface FileRouteTypes {
     | '/verify'
     | '/video'
     | '/video-agent'
-    | '/_authenticated/dashboard'
     | '/_authenticated/getting-ready'
     | '/_authenticated/integrations'
     | '/virtual-model/create-model'
@@ -507,13 +495,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VideoAgentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/getting-ready': {
       id: '/_authenticated/getting-ready'
       path: '/getting-ready'
@@ -630,7 +611,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedGettingReadyRoute: typeof AuthenticatedGettingReadyRoute
   AuthenticatedIntegrationsRoute: typeof AuthenticatedIntegrationsRoute
   AuthenticatedCopilotChatIdRoute: typeof AuthenticatedCopilotChatIdRoute
@@ -642,7 +622,6 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedGettingReadyRoute: AuthenticatedGettingReadyRoute,
   AuthenticatedIntegrationsRoute: AuthenticatedIntegrationsRoute,
   AuthenticatedCopilotChatIdRoute: AuthenticatedCopilotChatIdRoute,
