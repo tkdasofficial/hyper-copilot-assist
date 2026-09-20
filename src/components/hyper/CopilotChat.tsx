@@ -25,6 +25,14 @@ const starters = [
 
 type Message = { id: number; role: "user" | "assistant"; text: string };
 
+function PlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className={className}>
+      <path d="M6 3 21 12 6 21Z" fill="currentColor" />
+    </svg>
+  );
+}
+
 function AppIcon({ className }: { className?: string }) {
   return (
     <span className={cn("relative block shrink-0 overflow-hidden", className)}>
