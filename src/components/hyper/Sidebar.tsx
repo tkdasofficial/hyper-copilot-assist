@@ -5,6 +5,7 @@ import {
   Plus,
   History,
   ChevronDown,
+  MessageSquare,
   ImageIcon,
   Video,
   AudioLines,
@@ -104,6 +105,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 export function Sidebar() {
+  const [copilotOpen, setCopilotOpen] = useState(true);
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[248px] flex-col border-r border-border bg-background/80 px-3 pb-4 pt-4 backdrop-blur-xl lg:flex">
       <div className="px-2 pb-3">
