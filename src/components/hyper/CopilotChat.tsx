@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BrainCircuit, Check, ChevronDown, Paperclip, Play } from "lucide-react";
+import { BrainCircuit, Check, ChevronDown, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import lightIcon from "@/assets/light_app_icon.svg";
 import darkIcon from "@/assets/dark_app_icon.svg";
@@ -24,6 +24,14 @@ const starters = [
 ];
 
 type Message = { id: number; role: "user" | "assistant"; text: string };
+
+function PlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className={className}>
+      <path d="M6 3 21 12 6 21Z" fill="currentColor" />
+    </svg>
+  );
+}
 
 function AppIcon({ className }: { className?: string }) {
   return (
@@ -136,7 +144,7 @@ export function CopilotChat() {
               <input ref={fileRef} type="file" className="hidden" multiple />
               <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
               <Selector options={models} value={model} onChange={setModel} icon={BrainCircuit} />
-              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-full"><Play className="h-3 w-3 fill-current" strokeWidth={2.2} /></Button>
+              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-none"><PlayIcon className="h-2.5 w-2.5" /></Button>
             </div>
           </div>
         </div>
