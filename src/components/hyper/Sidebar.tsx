@@ -1,6 +1,11 @@
 import type { LucideIcon } from "lucide-react";
+import { useState } from "react";
 import {
   Home,
+  Plus,
+  History,
+  ChevronDown,
+  MessageSquare,
   ImageIcon,
   Video,
   AudioLines,
@@ -27,9 +32,11 @@ type Item = {
   to?: string;
 };
 
-const primary: Item[] = [
-  { label: "Copilot", icon: Home, to: "/dashboard" },
-  { label: "Explore", icon: Compass },
+const primary: Item[] = [{ label: "Explore", icon: Compass }];
+
+const copilotItems: Item[] = [
+  { label: "New", icon: Plus, to: "/copilot/new" },
+  { label: "History", icon: History, to: "/copilot/history" },
 ];
 
 const generate: Item[] = [
@@ -98,6 +105,7 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 export function Sidebar() {
+  const [copilotOpen, setCopilotOpen] = useState(true);
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[248px] flex-col border-r border-border bg-background/80 px-3 pb-4 pt-4 backdrop-blur-xl lg:flex">
       <div className="px-2 pb-3">
@@ -105,6 +113,30 @@ export function Sidebar() {
       </div>
 
       <nav className="flex-1 overflow-y-auto">
+        <button
+          type="button"
+          onClick={() => setCopilotOpen((open) => !open)}
+          aria-expanded={copilotOpen}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
+        >
+          <Home className="h-[18px] w-[18px] shrink-0" />
+          <span className="truncate">Copilot</span>
+          <ChevronDown
+            className={cn(
+              "ml-auto h-3.5 w-3.5 opacity-60 transition-transform",
+              copilotOpen && "rotate-180",
+            )}
+            strokeWidth={2.2}
+          />
+        </button>
+        {copilotOpen ? (
+          <div className="ml-5 space-y-0.5 border-l border-border pl-2">
+            <NavItem item={{ label: "Chat", icon: MessageSquare, to: "/copilot" }} />
+            {copilotItems.map((i) => (
+              <NavItem key={i.label} item={i} />
+            ))}
+          </div>
+        ) : null}
         <div className="space-y-0.5">
           {primary.map((i) => (
             <NavItem key={i.label} item={i} />

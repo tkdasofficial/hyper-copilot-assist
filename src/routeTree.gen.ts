@@ -27,6 +27,10 @@ import { Route as AuthenticatedGettingReadyRouteImport } from './routes/_authent
 import { Route as AuthenticatedIntegrationsRouteImport } from './routes/_authenticated/integrations'
 import { Route as VirtualModelIndexRouteImport } from './routes/virtual-model.index'
 import { Route as VirtualModelCreateModelRouteImport } from './routes/virtual-model.create-model'
+import { Route as AuthenticatedCopilotIndexRouteImport } from './routes/_authenticated/copilot.index'
+import { Route as AuthenticatedCopilotChatIdRouteImport } from './routes/_authenticated/copilot.$chatId'
+import { Route as AuthenticatedCopilotHistoryRouteImport } from './routes/_authenticated/copilot.history'
+import { Route as AuthenticatedCopilotNewRouteImport } from './routes/_authenticated/copilot.new'
 import { Route as AuthenticatedWorkflowsIndexRouteImport } from './routes/_authenticated/workflows.index'
 import { Route as AuthenticatedWorkflowsCreateRouteImport } from './routes/_authenticated/workflows.create'
 import { Route as OauthGoogleReturnRouteImport } from './routes/oauth/google/return'
@@ -127,6 +131,29 @@ const VirtualModelCreateModelRoute = VirtualModelCreateModelRouteImport.update({
   path: '/virtual-model/create-model',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCopilotIndexRoute =
+  AuthenticatedCopilotIndexRouteImport.update({
+    id: '/copilot/',
+    path: '/copilot/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCopilotChatIdRoute =
+  AuthenticatedCopilotChatIdRouteImport.update({
+    id: '/copilot/$chatId',
+    path: '/copilot/$chatId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCopilotHistoryRoute =
+  AuthenticatedCopilotHistoryRouteImport.update({
+    id: '/copilot/history',
+    path: '/copilot/history',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCopilotNewRoute = AuthenticatedCopilotNewRouteImport.update({
+  id: '/copilot/new',
+  path: '/copilot/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedWorkflowsIndexRoute =
   AuthenticatedWorkflowsIndexRouteImport.update({
     id: '/workflows/',
@@ -189,9 +216,13 @@ export interface FileRoutesByFullPath {
   '/integrations': typeof AuthenticatedIntegrationsRoute
   '/virtual-model/create-model': typeof VirtualModelCreateModelRoute
   '/virtual-model/': typeof VirtualModelIndexRoute
+  '/copilot/$chatId': typeof AuthenticatedCopilotChatIdRoute
+  '/copilot/history': typeof AuthenticatedCopilotHistoryRoute
+  '/copilot/new': typeof AuthenticatedCopilotNewRoute
   '/workflows/create': typeof AuthenticatedWorkflowsCreateRoute
   '/oauth/google/return': typeof OauthGoogleReturnRoute
   '/oauth/meta/return': typeof OauthMetaReturnRoute
+  '/copilot/': typeof AuthenticatedCopilotIndexRoute
   '/workflows/': typeof AuthenticatedWorkflowsIndexRoute
   '/api/public/jobs/worker': typeof ApiPublicJobsWorkerRoute
   '/api/public/pipeline/render': typeof ApiPublicPipelineRenderRoute
@@ -216,9 +247,13 @@ export interface FileRoutesByTo {
   '/integrations': typeof AuthenticatedIntegrationsRoute
   '/virtual-model/create-model': typeof VirtualModelCreateModelRoute
   '/virtual-model': typeof VirtualModelIndexRoute
+  '/copilot/$chatId': typeof AuthenticatedCopilotChatIdRoute
+  '/copilot/history': typeof AuthenticatedCopilotHistoryRoute
+  '/copilot/new': typeof AuthenticatedCopilotNewRoute
   '/workflows/create': typeof AuthenticatedWorkflowsCreateRoute
   '/oauth/google/return': typeof OauthGoogleReturnRoute
   '/oauth/meta/return': typeof OauthMetaReturnRoute
+  '/copilot': typeof AuthenticatedCopilotIndexRoute
   '/workflows': typeof AuthenticatedWorkflowsIndexRoute
   '/api/public/jobs/worker': typeof ApiPublicJobsWorkerRoute
   '/api/public/pipeline/render': typeof ApiPublicPipelineRenderRoute
@@ -245,9 +280,13 @@ export interface FileRoutesById {
   '/_authenticated/integrations': typeof AuthenticatedIntegrationsRoute
   '/virtual-model/create-model': typeof VirtualModelCreateModelRoute
   '/virtual-model/': typeof VirtualModelIndexRoute
+  '/_authenticated/copilot/$chatId': typeof AuthenticatedCopilotChatIdRoute
+  '/_authenticated/copilot/history': typeof AuthenticatedCopilotHistoryRoute
+  '/_authenticated/copilot/new': typeof AuthenticatedCopilotNewRoute
   '/_authenticated/workflows/create': typeof AuthenticatedWorkflowsCreateRoute
   '/oauth/google/return': typeof OauthGoogleReturnRoute
   '/oauth/meta/return': typeof OauthMetaReturnRoute
+  '/_authenticated/copilot/': typeof AuthenticatedCopilotIndexRoute
   '/_authenticated/workflows/': typeof AuthenticatedWorkflowsIndexRoute
   '/api/public/jobs/worker': typeof ApiPublicJobsWorkerRoute
   '/api/public/pipeline/render': typeof ApiPublicPipelineRenderRoute
@@ -274,9 +313,13 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/virtual-model/create-model'
     | '/virtual-model/'
+    | '/copilot/$chatId'
+    | '/copilot/history'
+    | '/copilot/new'
     | '/workflows/create'
     | '/oauth/google/return'
     | '/oauth/meta/return'
+    | '/copilot/'
     | '/workflows/'
     | '/api/public/jobs/worker'
     | '/api/public/pipeline/render'
@@ -301,9 +344,13 @@ export interface FileRouteTypes {
     | '/integrations'
     | '/virtual-model/create-model'
     | '/virtual-model'
+    | '/copilot/$chatId'
+    | '/copilot/history'
+    | '/copilot/new'
     | '/workflows/create'
     | '/oauth/google/return'
     | '/oauth/meta/return'
+    | '/copilot'
     | '/workflows'
     | '/api/public/jobs/worker'
     | '/api/public/pipeline/render'
@@ -329,9 +376,13 @@ export interface FileRouteTypes {
     | '/_authenticated/integrations'
     | '/virtual-model/create-model'
     | '/virtual-model/'
+    | '/_authenticated/copilot/$chatId'
+    | '/_authenticated/copilot/history'
+    | '/_authenticated/copilot/new'
     | '/_authenticated/workflows/create'
     | '/oauth/google/return'
     | '/oauth/meta/return'
+    | '/_authenticated/copilot/'
     | '/_authenticated/workflows/'
     | '/api/public/jobs/worker'
     | '/api/public/pipeline/render'
@@ -491,6 +542,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VirtualModelCreateModelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/copilot/': {
+      id: '/_authenticated/copilot/'
+      path: '/copilot'
+      fullPath: '/copilot/'
+      preLoaderRoute: typeof AuthenticatedCopilotIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/copilot/$chatId': {
+      id: '/_authenticated/copilot/$chatId'
+      path: '/copilot/$chatId'
+      fullPath: '/copilot/$chatId'
+      preLoaderRoute: typeof AuthenticatedCopilotChatIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/copilot/history': {
+      id: '/_authenticated/copilot/history'
+      path: '/copilot/history'
+      fullPath: '/copilot/history'
+      preLoaderRoute: typeof AuthenticatedCopilotHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/copilot/new': {
+      id: '/_authenticated/copilot/new'
+      path: '/copilot/new'
+      fullPath: '/copilot/new'
+      preLoaderRoute: typeof AuthenticatedCopilotNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/workflows/': {
       id: '/_authenticated/workflows/'
       path: '/workflows'
@@ -554,7 +633,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedGettingReadyRoute: typeof AuthenticatedGettingReadyRoute
   AuthenticatedIntegrationsRoute: typeof AuthenticatedIntegrationsRoute
+  AuthenticatedCopilotChatIdRoute: typeof AuthenticatedCopilotChatIdRoute
+  AuthenticatedCopilotHistoryRoute: typeof AuthenticatedCopilotHistoryRoute
+  AuthenticatedCopilotNewRoute: typeof AuthenticatedCopilotNewRoute
   AuthenticatedWorkflowsCreateRoute: typeof AuthenticatedWorkflowsCreateRoute
+  AuthenticatedCopilotIndexRoute: typeof AuthenticatedCopilotIndexRoute
   AuthenticatedWorkflowsIndexRoute: typeof AuthenticatedWorkflowsIndexRoute
 }
 
@@ -562,7 +645,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedGettingReadyRoute: AuthenticatedGettingReadyRoute,
   AuthenticatedIntegrationsRoute: AuthenticatedIntegrationsRoute,
+  AuthenticatedCopilotChatIdRoute: AuthenticatedCopilotChatIdRoute,
+  AuthenticatedCopilotHistoryRoute: AuthenticatedCopilotHistoryRoute,
+  AuthenticatedCopilotNewRoute: AuthenticatedCopilotNewRoute,
   AuthenticatedWorkflowsCreateRoute: AuthenticatedWorkflowsCreateRoute,
+  AuthenticatedCopilotIndexRoute: AuthenticatedCopilotIndexRoute,
   AuthenticatedWorkflowsIndexRoute: AuthenticatedWorkflowsIndexRoute,
 }
 
