@@ -136,7 +136,7 @@ export function CopilotChat() {
               <input ref={fileRef} type="file" className="hidden" multiple />
               <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
               <Selector options={models} value={model} onChange={setModel} icon={BrainCircuit} />
-              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-full"><Play className="h-3 w-3 fill-current" strokeWidth={2.2} /></Button>
+              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-none"><Play className="h-3 w-3 fill-current" strokeWidth={2.2} strokeLinejoin="miter" strokeLinecap="butt" /></Button>
             </div>
           </div>
         </div>
