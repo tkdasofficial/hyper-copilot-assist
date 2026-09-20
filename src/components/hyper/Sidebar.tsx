@@ -128,9 +128,8 @@ export function Sidebar() {
         </button>
         {copilotOpen ? (
           <div className="ml-5 space-y-0.5 border-l border-border pl-2">
-            {copilotItems.map((i) => (
-              <NavItem key={i.label} item={i} />
-            ))}
+            <NavItem item={newChatItem} />
+            <CopilotHistory />
           </div>
         ) : null}
         <div className="space-y-0.5">
