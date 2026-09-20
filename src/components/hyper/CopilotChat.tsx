@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BrainCircuit, Check, ChevronDown, Paperclip, Play } from "lucide-react";
+import { BrainCircuit, Check, ChevronDown, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import lightIcon from "@/assets/light_app_icon.svg";
 import darkIcon from "@/assets/dark_app_icon.svg";
