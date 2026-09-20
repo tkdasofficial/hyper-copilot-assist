@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BrainCircuit, Check, ChevronDown, Paperclip } from "lucide-react";
+import { ArrowRight, BrainCircuit, Check, ChevronDown, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import lightIcon from "@/assets/light_app_icon.svg";
 import darkIcon from "@/assets/dark_app_icon.svg";
@@ -109,14 +109,14 @@ export function CopilotChat() {
     <section className="relative flex min-h-[calc(100vh-65px)] flex-col">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pb-36 pt-6 sm:px-6 sm:pb-36 lg:pt-8">
         {messages.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center pb-6 text-center">
-            <AppIcon className="h-9 w-9 rounded-lg" />
-            <h1 className="mt-4 text-xl font-extrabold sm:text-2xl">What can I help with?</h1>
-            <p className="mt-1.5 max-w-sm text-[12px] leading-relaxed text-muted-foreground">Ask, create, analyze, or turn your next idea into a clear plan.</p>
-            <div className="mt-5 flex w-full max-w-md flex-col items-center gap-1">
+          <div className="flex flex-1 flex-col items-center justify-center pb-5 text-center">
+            <AppIcon className="h-14 w-14 rounded-xl sm:h-16 sm:w-16" />
+            <h1 className="mt-7 max-w-lg text-3xl font-medium leading-tight sm:text-4xl">What can I help with?</h1>
+            <div className="mt-12 flex w-full max-w-md flex-col gap-1 text-left sm:mt-14">
               {starters.map((starter) => (
-                <Button key={starter} type="button" variant="ghost" onClick={() => { setValue(starter); textareaRef.current?.focus(); }} className="h-7 w-full justify-start rounded-sm px-2 text-left text-[11px] font-normal text-muted-foreground hover:text-foreground">
-                  {starter}
+                <Button key={starter} type="button" variant="ghost" onClick={() => { setValue(starter); textareaRef.current?.focus(); }} className="h-auto min-h-11 w-full justify-start gap-4 rounded-sm px-3 py-2 text-left text-sm font-normal text-foreground sm:text-base">
+                  <ArrowRight className="h-5 w-5 shrink-0" strokeWidth={1.8} />
+                  <span className="leading-snug">{starter}</span>
                 </Button>
               ))}
             </div>
@@ -140,11 +140,11 @@ export function CopilotChat() {
         <div className="mx-auto max-w-2xl">
           <div className="rounded-lg border border-border-strong bg-surface shadow-float focus-within:ring-1 focus-within:ring-ring">
             <textarea ref={textareaRef} value={value} rows={1} aria-label="Message Copilot" placeholder="Message Copilot…" onChange={(event) => setValue(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); send(); } }} className="block max-h-[160px] min-h-[44px] w-full resize-none overflow-y-auto bg-transparent px-3 pb-1.5 pt-2.5 text-[13px] leading-5 text-foreground outline-none placeholder:text-muted-foreground" />
-            <div className="flex flex-wrap items-center gap-0.5 border-t border-border px-1.5 py-1.5">
+            <div className="flex flex-wrap items-center gap-0.5 px-1.5 pb-1.5 pt-0.5">
               <input ref={fileRef} type="file" className="hidden" multiple />
               <Button type="button" variant="ghost" size="icon" aria-label="Attach files" title="Attach files" onClick={() => fileRef.current?.click()} className="h-7 w-7 rounded-full text-muted-foreground"><Paperclip className="h-3.5 w-3.5" strokeWidth={1.9} /></Button>
               <Selector options={models} value={model} onChange={setModel} icon={BrainCircuit} />
-              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-none"><PlayIcon className="h-2.5 w-2.5" /></Button>
+              <Button type="button" onClick={send} disabled={!value.trim()} aria-label="Run" title="Run" size="icon" className="ml-auto h-7 w-7 rounded-full"><PlayIcon className="h-2.5 w-2.5" /></Button>
             </div>
           </div>
         </div>
